@@ -18,5 +18,12 @@ export type searchResult = {
 
 export type searchContext = {
   query: string;
-  result: Partial<SearchCategory, searchResult[]>;
+  result: Partial<Record<SearchCategory, searchResult[]>>;
+};
+
+export type SerpResults = {
+  query: string;
+  blogTutorials: searchResult[];
+  videos: searchResult[];
+  shorts: searchResult[];
 };
