@@ -3,6 +3,8 @@
 import { useState, useTransition } from "react";
 import { getSerpResults } from "@/app/lib/actions";
 import { SerpResults, searchResult } from "@/app/lib/definitions";
+import { saveResultToStorage } from "@/app/lib/utils";
+import { defaultFetch } from "../lib/default-data";
 
 function ResultSection({
   title,
@@ -14,7 +16,7 @@ function ResultSection({
   return (
     <section>
       <h2 className="text-lg font-semibold">{title}</h2>
-      <ul className="mt-2 flex flex-col gap-2">
+      {/* <ul className="mt-2 flex flex-col gap-2">
         {results.map((result) => (
           <li
             key={result.link}
@@ -28,16 +30,14 @@ function ResultSection({
             >
               {result.title}
             </a>
-            <p className="mt-1 text-sm text-neutral-600">
-              {result.snippet}
-            </p>
+            <p className="mt-1 text-sm text-neutral-600">{result.snippet}</p>
             <p className="mt-1 text-xs text-neutral-400">
               {result.source}
               {result.duration ? ` · ${result.duration}` : ""}
             </p>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </section>
   );
 }
@@ -49,16 +49,25 @@ export default function SearchForm() {
 
   const handleSearch = () => {
     startTransition(async () => {
-      setResults(await getSerpResults(query));
+      return;
+      const serpResults = await getSerpResults(query);
+      setResults(serpResults);
+      if (serpResults) {
+        saveResultToStorage({
+          query: serpResults.query,
+          result: {
+            searchOverview: serpResults?.searchOverview,
+            longFormVideos: serpResults?.longFormVideos,
+            shorts: serpResults?.shorts,
+          },
+        });
+      }
     });
   };
 
   return (
     <div className="w-full max-w-2xl">
-      <form
-        action={handleSearch}
-        className="flex gap-2"
-      >
+      <form action={handleSearch} className="flex gap-2">
         <input
           type="text"
           value={query}
@@ -77,9 +86,18 @@ export default function SearchForm() {
 
       {results && (
         <div className="mt-8 flex flex-col gap-6">
-          <ResultSection title="Blog Tutorials" results={results.blogTutorials} />
-          <ResultSection title="Top Performing Videos" results={results.videos} />
-          <ResultSection title="Top Performing Shorts" results={results.shorts} />
+          <ResultSection
+            title="Blog Tutorials"
+            results={results.blogTutorials}
+          />
+          <ResultSection
+            title="Top Performing Videos"
+            results={results.videos}
+          />
+          <ResultSection
+            title="Top Performing Shorts"
+            results={results.shorts}
+          />
         </div>
       )}
     </div>

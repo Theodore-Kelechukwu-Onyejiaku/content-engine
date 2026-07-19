@@ -1,3 +1,6 @@
+import { searchContext } from "@/app/lib/definitions";
+import { saveResultToStorage } from "./utils";
+
 // For AI Chatbot
 
 // Knowledge the chat assistant is allowed to answer from (see app/api/chat/route.ts).
@@ -16,7 +19,7 @@ Search results are cached for 24 hours per topic and category to avoid
 spending extra SerpApi search quota on repeat searches.
 `;
 
-const defaultFetch = {
+export const defaultFetch = {
   search_metadata: {
     id: "6a554f7802ab8cd2ff15266d",
     status: "Success",
@@ -349,3 +352,43 @@ const defaultFetch = {
     },
   },
 };
+
+// The "strapi" search above, mapped into the app's searchContext shape so it
+// can be used as previously fetched content (e.g. seeded into localStorage).
+export const defaultSearchContext: searchContext = {
+  query: defaultFetch.search_parameters.q,
+  result: {
+    articles: defaultFetch.organic_results.map((result) => ({
+      title: result.title,
+      link: result.link,
+      snippet: result.snippet,
+      source: result.source,
+    })),
+    videos: defaultFetch.inline_videos
+      .filter((video) => "short_clip" in video)
+      .map((video) => ({
+        title: video.title,
+        link: video.link,
+        snippet: video.snippet ?? "",
+        thumbnail: video.thumbnail,
+        duration: video.duration,
+        source: video.channel,
+      })),
+    youtube: defaultFetch.inline_videos.map((video) => ({
+      title: video.title,
+      link: video.link,
+      snippet: video.snippet ?? "",
+      thumbnail: video.thumbnail,
+      duration: video.duration,
+      source: video.channel,
+    })),
+    ai: defaultFetch.related_questions.map((question) => ({
+      title: question.question,
+      link: question.link ?? question.serpapi_link,
+      snippet: question.snippet ?? "",
+      source: question.displayed_link ?? "Google AI Overview",
+    })),
+  },
+};
+
+console.log(defaultFetch);

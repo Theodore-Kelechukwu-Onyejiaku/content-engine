@@ -1,9 +1,9 @@
 export type SearchCategory = "articles" | "videos" | "youtube" | "ai";
 
 export const CATEGORIES: { key: SearchCategory; label: string }[] = [
-  { key: "articles", label: "Articles" },
+  { key: "all", label: "Search Overview" },
   { key: "videos", label: "Video Shorts" },
-  { key: "youtube", label: "YouTube" },
+  { key: "youtube", label: "Long-form Video" },
   { key: "ai", label: "AI Overview" },
 ];
 
@@ -23,7 +23,7 @@ export type searchContext = {
 
 export type SerpResults = {
   query: string;
-  blogTutorials: searchResult[];
-  videos: searchResult[];
+  searchOverview: searchResult[];
+  longFormVideos: searchResult[];
   shorts: searchResult[];
 };

@@ -1,25 +1,26 @@
 "use server";
 
 import {
-  getTopBlogTutorials,
   getTopPerformingVideos,
   getTopPerformingShorts,
+  getAllResults,
 } from "@/app/lib/serp-functions";
 import { SerpResults } from "@/app/lib/definitions";
 
 export async function getSerpResults(
   query: string,
 ): Promise<SerpResults | null> {
-  console.log("I am called!");
   const trimmed = query.trim();
-  if (!trimmed) return null;
+  if (!trimmed) {
+    console.log("nothing to call");
+    return null;
+  }
 
-  return null
-  const [blogTutorials, videos, shorts] = await Promise.all([
-    getTopBlogTutorials(trimmed),
+  const [searchOverview, longFormVideos, shorts] = await Promise.all([
+    getAllResults(trimmed),
     getTopPerformingVideos(trimmed),
     getTopPerformingShorts(trimmed),
   ]);
 
-  return { query: trimmed, blogTutorials, videos, shorts };
+  return { query, searchOverview, longFormVideos, shorts };
 }

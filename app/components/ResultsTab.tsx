@@ -11,14 +11,14 @@ import {
 } from "lucide-react";
 
 const CATEGORY_ICONS: Record<SearchCategory, LucideIcon> = {
-  articles: NotebookPen,
+  all: NotebookPen,
   videos: VideotapeIcon,
   youtube: PlayCircle,
   ai: Sparkles,
 };
 
 const ResultsTab = () => {
-  const [activeTab, setActiveTab] = useState<SearchCategory>("articles");
+  const [activeTab, setActiveTab] = useState<SearchCategory>("all");
   const active = CATEGORIES.find((cat) => cat.key === activeTab)!;
 
   return (
