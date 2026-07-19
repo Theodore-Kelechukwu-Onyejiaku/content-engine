@@ -5,6 +5,7 @@ import { getSerpResults } from "@/app/lib/actions";
 import { SerpResults, searchResult } from "@/app/lib/definitions";
 import { saveResultToStorage } from "@/app/lib/utils";
 import { defaultFetch } from "../lib/default-data";
+import { useSearch } from "../SearchContext";
 
 function ResultSection({
   title,
@@ -47,20 +48,23 @@ export default function SearchForm() {
   const [results, setResults] = useState<SerpResults | null>(null);
   const [isPending, startTransition] = useTransition();
 
+  const setCurrentSearch = useSearch((state) => state.setCurrentSearch);
+
   const handleSearch = () => {
     startTransition(async () => {
-      return;
       const serpResults = await getSerpResults(query);
       setResults(serpResults);
       if (serpResults) {
-        saveResultToStorage({
+        const formattedSerpResult = {
           query: serpResults.query,
           result: {
             searchOverview: serpResults?.searchOverview,
             longFormVideos: serpResults?.longFormVideos,
             shorts: serpResults?.shorts,
           },
-        });
+        };
+        saveResultToStorage(formattedSerpResult);
+        setCurrentSearch(formattedSerpResult);
       }
     });
   };

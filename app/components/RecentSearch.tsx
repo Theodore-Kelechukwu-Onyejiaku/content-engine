@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useSearch } from "../SearchContext";
+import { X } from "lucide-react";
 
 const RecentSearch = () => {
   const recentSearches = useSearch((state) => state.previousSearches);
@@ -17,7 +18,7 @@ const RecentSearch = () => {
       <h2 className="text-lg font-semibold">Recent Searches</h2>
       <ul className="mt-2 flex flex-col gap-2">
         {recentSearches.map((search) => (
-          <li key={search.query}>
+          <li key={search.query} className="flex">
             <button
               onClick={() => {
                 setCurrentSearch(search.query);
@@ -27,6 +28,7 @@ const RecentSearch = () => {
             >
               {search.query}
             </button>
+            <X />
           </li>
         ))}
       </ul>
