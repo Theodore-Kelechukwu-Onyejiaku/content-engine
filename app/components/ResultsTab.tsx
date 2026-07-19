@@ -10,6 +10,8 @@ import {
   LucideIcon,
 } from "lucide-react";
 
+import { useSearch } from "../SearchContext";
+
 const CATEGORY_ICONS: Record<SearchCategory, LucideIcon> = {
   all: NotebookPen,
   videos: VideotapeIcon,
@@ -20,6 +22,8 @@ const CATEGORY_ICONS: Record<SearchCategory, LucideIcon> = {
 const ResultsTab = () => {
   const [activeTab, setActiveTab] = useState<SearchCategory>("all");
   const active = CATEGORIES.find((cat) => cat.key === activeTab)!;
+
+  const currentSearch = useSearch((state) => state.currentSearch);
 
   return (
     <div className="w-full">
@@ -47,6 +51,7 @@ const ResultsTab = () => {
         <h3 className="font-semibold">{active.label}</h3>
         <p className="mt-1 text-sm text-neutral-600">
           Search a topic to see the top {active.label} results here.
+          {JSON.stringify(currentSearch)}
         </p>
       </div>
     </div>

@@ -6,7 +6,6 @@ import { getResultsFromStorage } from "./lib/utils";
 
 export default function Home() {
   const fromStorage = getResultsFromStorage();
-  console.log("this is from Storage", fromStorage);
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-y-6 px-6 py-10">

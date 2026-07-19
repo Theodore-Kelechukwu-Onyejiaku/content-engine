@@ -1,9 +1,17 @@
 "use client";
 
-import { getResultsFromStorage } from "../lib/utils";
+import { useEffect } from "react";
+import { useSearch } from "../SearchContext";
 
 const RecentSearch = () => {
-  const recentSearches = getResultsFromStorage();
+  const recentSearches = useSearch((state) => state.previousSearches);
+  const setCurrentSearch = useSearch((state) => state.setCurrentSearch);
+  const hydrateSearches = useSearch((state) => state.hydrateSearches);
+
+  useEffect(() => {
+    hydrateSearches();
+  }, [hydrateSearches]);
+
   return (
     <aside className="shrink-0 md:basis-1/4">
       <h2 className="text-lg font-semibold">Recent Searches</h2>
@@ -11,6 +19,9 @@ const RecentSearch = () => {
         {recentSearches.map((search) => (
           <li key={search.query}>
             <button
+              onClick={() => {
+                setCurrentSearch(search.query);
+              }}
               type="button"
               className="w-full rounded-md border border-neutral-200 p-3 text-left text-sm font-medium hover:bg-neutral-100"
             >
