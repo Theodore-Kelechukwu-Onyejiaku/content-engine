@@ -25,9 +25,11 @@ const ResultsTab = () => {
 
   const currentSearch = useSearch((state) => state.currentSearch);
 
+  const ActiveIcon = CATEGORY_ICONS[activeTab];
+
   return (
     <div className="w-full">
-      <div className="flex flex-wrap gap-2">
+      <div className="inline-flex flex-wrap gap-1 rounded-xl border border-neutral-200 bg-white p-1 shadow-sm">
         {CATEGORIES.map((cat) => {
           const Icon = CATEGORY_ICONS[cat.key];
           const isActive = cat.key === activeTab;
@@ -36,10 +38,10 @@ const ResultsTab = () => {
               key={cat.key}
               type="button"
               onClick={() => setActiveTab(cat.key)}
-              className={`flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
                 isActive
-                  ? "bg-neutral-900 text-white"
-                  : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
+                  ? "bg-neutral-900 text-white shadow-sm"
+                  : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
               }`}
             >
               <Icon className="size-4" /> {cat.label}
@@ -47,12 +49,19 @@ const ResultsTab = () => {
           );
         })}
       </div>
-      <div className="mt-4 rounded-md border border-neutral-200 p-5">
-        <h3 className="font-semibold">{active.label}</h3>
-        <p className="mt-1 text-sm text-neutral-600">
+      <div className="mt-4 rounded-xl border border-neutral-200 bg-white p-5 shadow-sm">
+        <div className="flex items-center gap-2">
+          <span className="flex size-8 items-center justify-center rounded-lg bg-neutral-100 text-neutral-600">
+            <ActiveIcon className="size-4" />
+          </span>
+          <h3 className="font-semibold">{active.label}</h3>
+        </div>
+        <p className="mt-3 text-sm text-neutral-500">
           Search a topic to see the top {active.label} results here.
-          {JSON.stringify(currentSearch)}
         </p>
+        <pre className="mt-3 max-h-48 overflow-auto rounded-lg bg-neutral-50 p-3 font-mono text-xs break-all whitespace-pre-wrap text-neutral-400">
+          {JSON.stringify(currentSearch)}
+        </pre>
       </div>
     </div>
   );

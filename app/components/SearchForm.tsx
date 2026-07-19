@@ -6,6 +6,7 @@ import { SerpResults, searchResult } from "@/app/lib/definitions";
 import { saveResultToStorage } from "@/app/lib/utils";
 import { defaultFetch } from "../lib/default-data";
 import { useSearch } from "../SearchContext";
+import { Search, Loader2 } from "lucide-react";
 
 function ResultSection({
   title,
@@ -71,20 +72,28 @@ export default function SearchForm() {
 
   return (
     <div className="w-full max-w-2xl">
-      <form action={handleSearch} className="flex gap-2">
+      <form action={handleSearch} className="relative">
+        <Search className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-neutral-400" />
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Enter a topic to search..."
-          className="flex-1 rounded-md border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400 outline-none focus:border-neutral-500"
+          className="w-full rounded-xl border border-neutral-200 bg-white py-3.5 pr-32 pl-11 text-sm shadow-sm transition placeholder:text-neutral-400 outline-none focus:border-neutral-400 focus:ring-4 focus:ring-neutral-200/60"
         />
         <button
           type="submit"
           disabled={isPending || !query.trim()}
-          className="rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-700 disabled:pointer-events-none disabled:opacity-50"
+          className="absolute top-1/2 right-2 flex -translate-y-1/2 items-center gap-1.5 rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-700 disabled:pointer-events-none disabled:opacity-40"
         >
-          {isPending ? "Searching..." : "Search"}
+          {isPending ? (
+            <>
+              <Loader2 className="size-3.5 animate-spin" />
+              Searching...
+            </>
+          ) : (
+            "Search"
+          )}
         </button>
       </form>
 
