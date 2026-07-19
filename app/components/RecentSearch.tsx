@@ -43,6 +43,7 @@ const RecentSearch = () => {
             >
               <button
                 onClick={() => {
+                  console.log("I just clicked!");
                   setCurrentSearch(search.query);
                 }}
                 type="button"

@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 
 import { useSearch } from "../SearchContext";
+import All from "./ResultCards/All";
+import LongFormVideo from "./ResultCards/LongFormVideo";
 
 const CATEGORY_ICONS: Record<SearchCategory, LucideIcon> = {
   all: NotebookPen,
@@ -59,9 +61,16 @@ const ResultsTab = () => {
         <p className="mt-3 text-sm text-neutral-500">
           Search a topic to see the top {active.label} results here.
         </p>
-        <pre className="mt-3 max-h-48 overflow-auto rounded-lg bg-neutral-50 p-3 font-mono text-xs break-all whitespace-pre-wrap text-neutral-400">
+        {/* <pre className="mt-3 max-h-48 overflow-auto rounded-lg bg-neutral-50 p-3 font-mono text-xs break-all whitespace-pre-wrap text-neutral-400">
           {JSON.stringify(currentSearch)}
-        </pre>
+        </pre> */}
+
+        {activeTab == "all" ? (
+          <All />
+        ) : activeTab == "youtube" ? (
+          <LongFormVideo />
+        ) : null}
+        {/* <All /> */}
       </div>
     </div>
   );
