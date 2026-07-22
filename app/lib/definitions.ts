@@ -21,6 +21,48 @@ export type searchContext = {
   result: Partial<Record<SearchCategory, searchResult[]>>;
 };
 
+export type SeoCheckStatus = "pass" | "warn" | "fail" | "skipped";
+
+export type SeoCheckValue = { label: string; value: string | null };
+
+export type SeoCheck = {
+  id: string;
+  title: string;
+  description: string;
+  status: SeoCheckStatus;
+  details: string;
+  found?: SeoCheckValue[];
+  image?: string | null;
+};
+
+export type SeoPageMetadata = {
+  title: string | null;
+  description: string | null;
+  canonical: string | null;
+  robots: string | null;
+  lang: string | null;
+  openGraph: {
+    title: string | null;
+    description: string | null;
+    image: string | null;
+    type: string | null;
+    url: string | null;
+  };
+  h1: string[];
+  wordCount: number;
+  images: { total: number; missingAlt: number };
+  structuredDataTypes: string[];
+  lastModified: string | null;
+};
+
+export type SeoAuditResult = {
+  url: string;
+  score: number;
+  page: SeoPageMetadata;
+  checks: SeoCheck[];
+  auditedAt: string;
+};
+
 export type SerpResults = {
   query: string;
   searchOverview: searchResult[];
