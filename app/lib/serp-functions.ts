@@ -1,4 +1,3 @@
-import { searchResult } from "@/app/lib/definitions";
 import { getJson } from "serpapi";
 
 type OrganicResult = {
@@ -9,7 +8,9 @@ type OrganicResult = {
   displayed_link?: string;
 };
 
-export const getAllResults = async (query: string): Promise<searchResult[]> => {
+// These pass the raw SerpApi responses through; the result cards narrow
+// the shapes they render.
+export const getAllResults = async (query: string): Promise<unknown> => {
   try {
     const json = await getJson({
       engine: "google",
@@ -37,7 +38,7 @@ export const getAllResults = async (query: string): Promise<searchResult[]> => {
 
 export const getTopPerformingVideos = async (
   query: string,
-): Promise<searchResult[]> => {
+): Promise<unknown> => {
   const json = await getJson({
     engine: "youtube",
     api_key: process.env.SERPAPI_API_KEY,
@@ -64,7 +65,7 @@ export const getTopPerformingVideos = async (
 
 export const getTopPerformingShorts = async (
   query: string,
-): Promise<searchResult[]> => {
+): Promise<unknown> => {
   return null;
   return [
     {

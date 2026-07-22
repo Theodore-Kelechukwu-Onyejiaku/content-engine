@@ -2,7 +2,7 @@ import { searchContext } from "@/app/lib/definitions";
 import { defaultSearchContext } from "@/app/lib/default-data";
 
 const STORAGE_KEY = "content-engine-results";
-const MAX_STORED_RESULTS = 20;
+export const MAX_STORED_RESULTS = 20;
 
 export const getResultsFromStorage = (): searchContext[] => {
   if (typeof window === "undefined") return [];

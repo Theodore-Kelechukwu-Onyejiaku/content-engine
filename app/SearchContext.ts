@@ -4,6 +4,7 @@ import {
   getResultsFromStorage,
   deleteResultFromStorage,
   saveResultToStorage,
+  MAX_STORED_RESULTS,
 } from "./lib/utils";
 
 type State = {
@@ -13,6 +14,7 @@ type State = {
 
 type Action = {
   hydrateSearches: () => void;
+  addToSearch: (result: searchContext) => void;
   setCurrentSearch: (query: string) => void;
   removeFromSearches: (query: string) => void;
 };
@@ -29,6 +31,12 @@ export const useSearch = create<State & Action>()((set) => ({
     saveResultToStorage(result);
     set((state) => ({
       currentSearch: result,
+      previousSearches: [
+        result,
+        ...state.previousSearches.filter(
+          (search) => search.query !== result.query,
+        ),
+      ].slice(0, MAX_STORED_RESULTS),
     }));
   },
 

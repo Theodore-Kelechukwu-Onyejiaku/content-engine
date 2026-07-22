@@ -1,4 +1,4 @@
-export type SearchCategory = "articles" | "videos" | "youtube" | "ai";
+export type SearchCategory = "all" | "articles" | "videos" | "youtube" | "ai";
 
 export const CATEGORIES: { key: SearchCategory; label: string }[] = [
   { key: "all", label: "Search Overview" },
@@ -16,9 +16,12 @@ export type searchResult = {
   source: string;
 };
 
+// `result` holds raw SerpApi responses keyed by section (searchOverview,
+// longFormVideos, shorts) or legacy category keys; consumers narrow the
+// shape they need with a cast.
 export type searchContext = {
   query: string;
-  result: Partial<Record<SearchCategory, searchResult[]>>;
+  result: Record<string, unknown>;
 };
 
 export type SeoCheckStatus = "pass" | "warn" | "fail" | "skipped";
@@ -63,9 +66,10 @@ export type SeoAuditResult = {
   auditedAt: string;
 };
 
+// Raw SerpApi responses, passed through untyped from the server action.
 export type SerpResults = {
   query: string;
-  searchOverview: searchResult[];
-  longFormVideos: searchResult[];
-  shorts: searchResult[];
+  searchOverview: unknown;
+  longFormVideos: unknown;
+  shorts: unknown;
 };

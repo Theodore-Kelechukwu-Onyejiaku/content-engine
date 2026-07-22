@@ -16,6 +16,7 @@ import LongFormVideo from "./ResultCards/LongFormVideo";
 
 const CATEGORY_ICONS: Record<SearchCategory, LucideIcon> = {
   all: NotebookPen,
+  articles: NotebookPen,
   videos: VideotapeIcon,
   youtube: PlayCircle,
   ai: Sparkles,
