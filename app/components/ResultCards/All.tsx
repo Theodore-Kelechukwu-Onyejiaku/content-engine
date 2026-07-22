@@ -66,12 +66,12 @@ const SectionHeading = ({
   count?: number;
 }) => (
   <div className="flex items-center gap-1.5">
-    <Icon className="size-3.5 text-neutral-400" />
-    <h4 className="text-xs font-semibold tracking-wide text-neutral-500 uppercase">
+    <Icon className="size-4 text-neutral-400" />
+    <h4 className="text-sm font-semibold tracking-wide text-neutral-500 uppercase">
       {title}
     </h4>
     {count !== undefined && count > 0 && (
-      <span className="rounded-full bg-neutral-100 px-1.5 py-0.5 text-[10px] font-medium text-neutral-500 tabular-nums">
+      <span className="rounded-full bg-neutral-100 px-1.5 py-0.5 text-xs font-medium text-neutral-500 tabular-nums">
         {count}
       </span>
     )}
@@ -121,20 +121,20 @@ export default function All() {
                       />
                     )}
                     {video.duration && (
-                      <span className="absolute right-1.5 bottom-1.5 rounded bg-black/80 px-1.5 py-0.5 text-[10px] font-medium text-white tabular-nums">
+                      <span className="absolute right-1.5 bottom-1.5 rounded bg-black/80 px-1.5 py-0.5 text-xs font-medium text-white tabular-nums">
                         {video.duration}
                       </span>
                     )}
                   </div>
                   <div className="p-2.5">
-                    <p className="line-clamp-2 text-sm font-medium text-neutral-800 group-hover:underline">
+                    <p className="line-clamp-2 text-base font-medium text-neutral-800 group-hover:underline">
                       {video.title}
                     </p>
-                    <p className="mt-1 truncate text-xs text-neutral-400">
+                    <p className="mt-1 truncate text-sm text-neutral-400">
                       {[video.channel, video.date].filter(Boolean).join(" · ")}
                     </p>
                     {video.key_moments && video.key_moments.length > 0 && (
-                      <p className="mt-1 text-[10px] font-medium text-neutral-400">
+                      <p className="mt-1 text-xs font-medium text-neutral-400">
                         {video.key_moments.length} key moments
                       </p>
                     )}
@@ -170,14 +170,14 @@ export default function All() {
                     />
                   )}
                   <div className="min-w-0">
-                    <p className="truncate text-xs font-medium text-neutral-500">
+                    <p className="truncate text-sm font-medium text-neutral-500">
                       {result.source ?? ""}
                     </p>
-                    <p className="truncate text-[10px] text-neutral-400">
+                    <p className="truncate text-xs text-neutral-400">
                       {result.displayed_link ?? ""}
                     </p>
                   </div>
-                  <span className="ml-auto rounded-full bg-neutral-100 px-2 py-0.5 text-[10px] font-medium text-neutral-500 tabular-nums">
+                  <span className="ml-auto rounded-full bg-neutral-100 px-2 py-0.5 text-xs font-medium text-neutral-500 tabular-nums">
                     #{result.position}
                   </span>
                 </div>
@@ -185,13 +185,13 @@ export default function All() {
                   href={result.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-1.5 flex items-start gap-1 font-medium text-neutral-800 hover:underline"
+                  className="mt-1.5 flex items-start gap-1 text-lg font-medium text-neutral-800 hover:underline"
                 >
                   {result.title}
                   <ExternalLink className="mt-1 size-3 shrink-0 text-neutral-300" />
                 </a>
                 {result.snippet && (
-                  <p className="mt-1 line-clamp-2 text-sm text-neutral-500">
+                  <p className="mt-1 line-clamp-2 text-base text-neutral-500">
                     {result.snippet}
                   </p>
                 )}
@@ -204,7 +204,7 @@ export default function All() {
                           href={sitelink.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="rounded-md bg-neutral-100 px-2 py-1 text-xs text-neutral-600 transition-colors hover:bg-neutral-200 hover:text-neutral-900"
+                          className="rounded-md bg-neutral-100 px-2 py-1 text-sm text-neutral-600 transition-colors hover:bg-neutral-200 hover:text-neutral-900"
                         >
                           {sitelink.title}
                         </a>
@@ -229,7 +229,7 @@ export default function All() {
             {relatedQuestions.map((item) => (
               <li
                 key={item.question}
-                className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm text-neutral-700"
+                className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-base text-neutral-700"
               >
                 {item.question}
               </li>
@@ -253,7 +253,7 @@ export default function All() {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block rounded-full border border-neutral-200 px-3 py-1.5 text-sm text-neutral-600 transition-colors hover:border-neutral-300 hover:bg-neutral-50 hover:text-neutral-900"
+                  className="inline-block rounded-full border border-neutral-200 px-3 py-1.5 text-base text-neutral-600 transition-colors hover:border-neutral-300 hover:bg-neutral-50 hover:text-neutral-900"
                 >
                   {item.query}
                 </a>

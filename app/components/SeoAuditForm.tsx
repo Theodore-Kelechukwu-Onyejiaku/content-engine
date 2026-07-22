@@ -70,11 +70,11 @@ function ScoreGauge({ score }: { score: number }) {
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <span
-          className={`text-3xl font-bold tabular-nums ${scoreColor(score)}`}
+          className={`text-4xl font-bold tabular-nums ${scoreColor(score)}`}
         >
           {score}%
         </span>
-        <span className="text-xs text-neutral-500">SEO score</span>
+        <span className="text-sm text-neutral-500">SEO score</span>
       </div>
     </div>
   );
@@ -83,11 +83,11 @@ function ScoreGauge({ score }: { score: number }) {
 function MetaRow({ label, value }: { label: string; value: string | null }) {
   return (
     <div className="flex flex-col gap-0.5 py-2 sm:flex-row sm:gap-4">
-      <dt className="w-40 shrink-0 text-xs font-medium tracking-wide text-neutral-400 uppercase">
+      <dt className="w-44 shrink-0 text-sm font-medium tracking-wide text-neutral-400 uppercase">
         {label}
       </dt>
       <dd
-        className={`min-w-0 text-sm wrap-break-word ${
+        className={`min-w-0 text-base wrap-break-word ${
           value ? "text-neutral-800" : "text-neutral-400 italic"
         }`}
       >
@@ -105,15 +105,15 @@ function CheckCard({ check }: { check: SeoCheck }) {
       <Icon className={`mt-0.5 size-5 shrink-0 ${className}`} />
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-x-2">
-          <h3 className="text-sm font-semibold text-neutral-900">
+          <h3 className="text-lg font-semibold text-neutral-900">
             {check.title}
           </h3>
-          <span className={`text-xs font-medium ${className}`}>{label}</span>
+          <span className={`text-sm font-medium ${className}`}>{label}</span>
         </div>
-        <p className="mt-1 text-xs leading-relaxed text-neutral-500">
+        <p className="mt-1 text-sm leading-relaxed text-neutral-500">
           {check.description}
         </p>
-        <p className="mt-2 text-sm wrap-break-word text-neutral-700">
+        <p className="mt-2 text-base wrap-break-word text-neutral-700">
           {check.details}
         </p>
 
@@ -186,7 +186,7 @@ export default function SeoAuditForm() {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="Enter a URL to audit, e.g. https://strapi.io/blog/..."
-            className="w-full rounded-xl border border-neutral-200 bg-white py-3.5 pr-32 pl-11 text-sm shadow-sm transition placeholder:text-neutral-400 outline-none focus:border-neutral-400 focus:ring-4 focus:ring-neutral-200/60"
+            className="w-full rounded-xl border border-neutral-200 bg-white py-3.5 pr-32 pl-11 text-base shadow-sm transition placeholder:text-neutral-400 outline-none focus:border-neutral-400 focus:ring-4 focus:ring-neutral-200/60"
           />
           <button
             type="submit"
@@ -208,12 +208,12 @@ export default function SeoAuditForm() {
           value={keywords}
           onChange={(e) => setKeywords(e.target.value)}
           placeholder="Target keywords, comma-separated (optional)"
-          className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-sm shadow-sm transition placeholder:text-neutral-400 outline-none focus:border-neutral-400 focus:ring-4 focus:ring-neutral-200/60"
+          className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-base shadow-sm transition placeholder:text-neutral-400 outline-none focus:border-neutral-400 focus:ring-4 focus:ring-neutral-200/60"
         />
       </form>
 
       {error && (
-        <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-base text-red-700">
           {error}
         </p>
       )}
@@ -223,10 +223,10 @@ export default function SeoAuditForm() {
           <div className="flex flex-col items-center gap-4 rounded-xl border border-neutral-200 bg-white p-6 sm:flex-row sm:gap-8">
             <ScoreGauge score={result.score} />
             <div className="min-w-0 text-center sm:text-left">
-              <p className="text-sm font-medium break-all text-neutral-900">
+              <p className="text-lg font-medium break-all text-neutral-900">
                 {result.url}
               </p>
-              <p className="mt-1 text-xs text-neutral-500">
+              <p className="mt-1 text-sm text-neutral-500">
                 Audited {new Date(result.auditedAt).toLocaleString()} ·{" "}
                 {result.checks.filter((c) => c.status === "pass").length} of{" "}
                 {result.checks.filter((c) => c.status !== "skipped").length}{" "}

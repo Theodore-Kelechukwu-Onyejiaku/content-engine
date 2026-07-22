@@ -66,12 +66,12 @@ const SectionHeading = ({
   count?: number;
 }) => (
   <div className="flex items-center gap-1.5">
-    <Icon className="size-3.5 text-neutral-400" />
-    <h4 className="text-xs font-semibold tracking-wide text-neutral-500 uppercase">
+    <Icon className="size-4 text-neutral-400" />
+    <h4 className="text-sm font-semibold tracking-wide text-neutral-500 uppercase">
       {title}
     </h4>
     {count !== undefined && count > 0 && (
-      <span className="rounded-full bg-neutral-100 px-1.5 py-0.5 text-[10px] font-medium text-neutral-500 tabular-nums">
+      <span className="rounded-full bg-neutral-100 px-1.5 py-0.5 text-xs font-medium text-neutral-500 tabular-nums">
         {count}
       </span>
     )}
@@ -93,7 +93,7 @@ const Thumbnail = ({
       <img src={src} alt="" className="h-full w-full object-cover" />
     )}
     {length && (
-      <span className="absolute right-1.5 bottom-1.5 rounded bg-black/80 px-1.5 py-0.5 text-[10px] font-medium text-white tabular-nums">
+      <span className="absolute right-1.5 bottom-1.5 rounded bg-black/80 px-1.5 py-0.5 text-xs font-medium text-white tabular-nums">
         {length}
       </span>
     )}
@@ -110,13 +110,13 @@ const ChannelLine = ({ video }: { video: VideoResult }) => (
         className="size-4 shrink-0 rounded-full"
       />
     )}
-    <span className="max-w-full truncate text-xs text-neutral-500">
+    <span className="max-w-full truncate text-sm text-neutral-500">
       {video.channel?.name}
     </span>
     {video.channel?.verified && (
       <BadgeCheck className="size-3.5 shrink-0 text-neutral-400" />
     )}
-    <span className="text-xs text-neutral-400">
+    <span className="text-sm text-neutral-400">
       {[
         video.views !== undefined ? `${formatCount(video.views)} views` : null,
         video.published_date,
@@ -133,7 +133,7 @@ const ExtensionBadges = ({ extensions }: { extensions?: string[] }) =>
       {extensions.map((extension) => (
         <span
           key={extension}
-          className="rounded bg-neutral-100 px-1.5 py-0.5 text-[10px] font-semibold text-neutral-500"
+          className="rounded bg-neutral-100 px-1.5 py-0.5 text-xs font-semibold text-neutral-500"
         >
           {extension}
         </span>
@@ -159,7 +159,7 @@ export default function LongFormVideo() {
   return (
     <div className="mt-5 flex flex-col gap-7">
       {totalResults !== undefined && totalResults > 0 && (
-        <p className="text-xs text-neutral-400">
+        <p className="text-sm text-neutral-400">
           {formatCount(totalResults)} videos on YouTube for this topic
         </p>
       )}
@@ -187,12 +187,12 @@ export default function LongFormVideo() {
                     className="h-20 w-36"
                   />
                   <div className="min-w-0">
-                    <p className="line-clamp-2 font-medium text-neutral-800 group-hover:underline">
+                    <p className="line-clamp-2 text-lg font-medium text-neutral-800 group-hover:underline">
                       {video.title}
                     </p>
                     <ChannelLine video={video} />
                     {video.description && (
-                      <p className="mt-1 line-clamp-2 text-sm text-neutral-500">
+                      <p className="mt-1 line-clamp-2 text-base text-neutral-500">
                         {video.description}
                       </p>
                     )}
@@ -237,11 +237,11 @@ export default function LongFormVideo() {
                     className="h-20 w-36"
                   />
                   <div className="min-w-0">
-                    <p className="line-clamp-2 font-medium text-neutral-800 group-hover:underline">
+                    <p className="line-clamp-2 text-lg font-medium text-neutral-800 group-hover:underline">
                       {playlist.title}
                     </p>
                     <div className="mt-1 flex items-center gap-1.5">
-                      <span className="truncate text-xs text-neutral-500">
+                      <span className="truncate text-sm text-neutral-500">
                         {playlist.channel?.name}
                       </span>
                       {playlist.channel?.verified && (
@@ -258,7 +258,7 @@ export default function LongFormVideo() {
                           href={video.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-xs text-neutral-500 hover:text-neutral-900"
+                          className="flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-900"
                         >
                           <Play className="size-3 shrink-0 text-neutral-300" />
                           <span className="truncate">{video.title}</span>
@@ -301,7 +301,7 @@ export default function LongFormVideo() {
                     className="h-28 w-full rounded-none"
                   />
                   <div className="p-2.5">
-                    <p className="line-clamp-2 text-sm font-medium text-neutral-800 group-hover:underline">
+                    <p className="line-clamp-2 text-base font-medium text-neutral-800 group-hover:underline">
                       {video.title}
                     </p>
                     <ChannelLine video={video} />
@@ -328,7 +328,7 @@ export default function LongFormVideo() {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 rounded-full border border-neutral-200 py-1 pr-3 pl-1 text-sm text-neutral-600 transition-colors hover:border-neutral-300 hover:bg-neutral-50 hover:text-neutral-900"
+                  className="flex items-center gap-1.5 rounded-full border border-neutral-200 py-1 pr-3 pl-1 text-base text-neutral-600 transition-colors hover:border-neutral-300 hover:bg-neutral-50 hover:text-neutral-900"
                 >
                   {item.thumbnail && (
                     // eslint-disable-next-line @next/next/no-img-element
