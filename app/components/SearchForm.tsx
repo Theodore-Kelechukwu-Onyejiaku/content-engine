@@ -50,6 +50,7 @@ export default function SearchForm() {
   const [isPending, startTransition] = useTransition();
 
   const setCurrentSearch = useSearch((state) => state.setCurrentSearch);
+  const addToSearch = useSearch((state) => state.addToSearch);
 
   const handleSearch = () => {
     startTransition(async () => {
@@ -64,8 +65,9 @@ export default function SearchForm() {
             shorts: serpResults?.shorts,
           },
         };
-        saveResultToStorage(formattedSerpResult);
+
         setCurrentSearch(formattedSerpResult);
+        addToSearch(formattedSerpResult);
       }
     });
   };

@@ -61,7 +61,7 @@ export default function Sidebar() {
 
       {/* Collapsed rail (desktop only) */}
       {collapsed && (
-        <div className="hidden shrink-0 border-r border-neutral-200 bg-white px-2 py-4 md:block">
+        <div className="sticky top-0 hidden h-screen shrink-0 border-r border-neutral-200 bg-white px-2 py-4 md:block">
           <button
             type="button"
             aria-label="Open sidebar"
@@ -75,7 +75,7 @@ export default function Sidebar() {
 
       {/* Sidebar: slide-in drawer on mobile, static on md+ */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-72 shrink-0 flex-col border-r border-neutral-200 bg-white transition-transform md:static md:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 shrink-0 flex-col border-r border-neutral-200 bg-white transition-transform md:sticky md:top-0 md:h-screen md:translate-x-0 ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         } ${collapsed ? "md:hidden" : ""}`}
       >

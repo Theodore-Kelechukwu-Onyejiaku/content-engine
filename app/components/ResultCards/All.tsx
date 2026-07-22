@@ -94,27 +94,6 @@ export default function All() {
 
   return (
     <div className="mt-5 flex flex-col gap-7">
-      {/* Keywords — People Also Ask questions, the content-idea gold */}
-      {relatedQuestions.length > 0 && (
-        <section>
-          <SectionHeading
-            icon={MessageCircleQuestion}
-            title="Keywords · People Also Ask"
-            count={relatedQuestions.length}
-          />
-          <ul className="mt-2.5 flex flex-wrap gap-2">
-            {relatedQuestions.map((item) => (
-              <li
-                key={item.question}
-                className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm text-neutral-700"
-              >
-                {item.question}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
       {/* Inline videos — horizontal scroll row */}
       {inlineVideos.length > 0 && (
         <section>
@@ -232,6 +211,27 @@ export default function All() {
                       ))}
                     </div>
                   )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* Keywords — People Also Ask questions, the content-idea gold */}
+      {relatedQuestions.length > 0 && (
+        <section>
+          <SectionHeading
+            icon={MessageCircleQuestion}
+            title="People Also Ask"
+            count={relatedQuestions.length}
+          />
+          <ul className="mt-2.5 flex flex-wrap gap-2">
+            {relatedQuestions.map((item) => (
+              <li
+                key={item.question}
+                className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm text-neutral-700"
+              >
+                {item.question}
               </li>
             ))}
           </ul>

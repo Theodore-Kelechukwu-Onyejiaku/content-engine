@@ -1,6 +1,10 @@
 import { create } from "zustand";
 import { searchContext } from "./lib/definitions";
-import { getResultsFromStorage, deleteResultFromStorage } from "./lib/utils";
+import {
+  getResultsFromStorage,
+  deleteResultFromStorage,
+  saveResultToStorage,
+} from "./lib/utils";
 
 type State = {
   previousSearches: searchContext[];
@@ -21,11 +25,17 @@ export const useSearch = create<State & Action>()((set) => ({
 
   hydrateSearches: () => set({ previousSearches: getResultsFromStorage() }),
 
+  addToSearch: (result) => {
+    saveResultToStorage(result);
+    set((state) => ({
+      currentSearch: result,
+    }));
+  },
+
   setCurrentSearch: (query) =>
     set((state) => ({
       currentSearch:
-        state.previousSearches.find((search) => search.query === query) ??
-        null,
+        state.previousSearches.find((search) => search.query === query) ?? null,
     })),
 
   removeFromSearches: (query) => {

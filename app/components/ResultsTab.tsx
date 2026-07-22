@@ -30,7 +30,7 @@ const ResultsTab = () => {
   const ActiveIcon = CATEGORY_ICONS[activeTab];
 
   return (
-    <div className="w-full">
+    <div className="w-full min-w-0">
       <div className="inline-flex flex-wrap gap-1 rounded-xl border border-neutral-200 bg-white p-1 shadow-sm">
         {CATEGORIES.map((cat) => {
           const Icon = CATEGORY_ICONS[cat.key];

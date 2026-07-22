@@ -2,6 +2,7 @@ import { searchContext } from "@/app/lib/definitions";
 import { defaultSearchContext } from "@/app/lib/default-data";
 
 const STORAGE_KEY = "content-engine-results";
+const MAX_STORED_RESULTS = 20;
 
 export const getResultsFromStorage = (): searchContext[] => {
   if (typeof window === "undefined") return [];
@@ -26,7 +27,10 @@ export const saveResultToStorage = (
     (result) => result.query !== context.query,
   );
   results.unshift(context);
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(results));
+  window.localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(results.slice(0, MAX_STORED_RESULTS)),
+  );
 
   console.log("I have saved to storage");
 };

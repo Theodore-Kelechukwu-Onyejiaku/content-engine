@@ -35,29 +35,34 @@ const RecentSearch = () => {
           </p>
         </div>
       ) : (
-        <ul className="mt-3 flex flex-col gap-1.5">
-          {recentSearches.map((search) => (
-            <li
-              key={search.query}
-              className="group relative flex items-center rounded-lg border border-neutral-200 bg-white transition-all hover:border-neutral-300 hover:shadow-sm"
-            >
-              <button
-                onClick={() => {
-                  console.log("I just clicked!");
-                  setCurrentSearch(search.query);
-                }}
-                type="button"
-                className="flex min-w-0 flex-1 items-center gap-2.5 rounded-lg p-3 pr-9 text-left cursor-pointer"
+        <div className="relative mt-3">
+          <ul className="flex max-h-80 flex-col gap-1.5 overflow-y-auto pr-1">
+            {recentSearches.map((search) => (
+              <li
+                key={search.query}
+                className="group relative flex items-center rounded-lg border border-neutral-200 bg-white transition-all hover:border-neutral-300 hover:shadow-sm"
               >
-                <Search className="size-3.5 shrink-0 text-neutral-400" />
-                <span className="truncate text-sm font-medium text-neutral-800 capitalize">
-                  {search.query}
-                </span>
-              </button>
-              <X className="absolute right-2.5 size-4 shrink-0 cursor-pointer rounded text-neutral-300 opacity-0 transition-opacity group-hover:opacity-100 hover:text-neutral-700" />
-            </li>
-          ))}
-        </ul>
+                <button
+                  onClick={() => {
+                    console.log("I just clicked!");
+                    setCurrentSearch(search.query);
+                  }}
+                  type="button"
+                  className="flex min-w-0 flex-1 items-center gap-2.5 rounded-lg p-3 pr-9 text-left cursor-pointer"
+                >
+                  <Search className="size-3.5 shrink-0 text-neutral-400" />
+                  <span className="truncate text-sm font-medium text-neutral-800 capitalize">
+                    {search.query}
+                  </span>
+                </button>
+                <X className="absolute right-2.5 size-4 shrink-0 cursor-pointer rounded text-neutral-300 opacity-0 transition-opacity group-hover:opacity-100 hover:text-neutral-700" />
+              </li>
+            ))}
+          </ul>
+          {recentSearches.length > 6 && (
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 rounded-b-lg bg-linear-to-t from-white to-transparent" />
+          )}
+        </div>
       )}
     </aside>
   );

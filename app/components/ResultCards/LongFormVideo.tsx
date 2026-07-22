@@ -101,7 +101,7 @@ const Thumbnail = ({
 );
 
 const ChannelLine = ({ video }: { video: VideoResult }) => (
-  <div className="mt-1 flex min-w-0 items-center gap-1.5">
+  <div className="mt-1 flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-0.5">
     {video.channel?.thumbnail && (
       // eslint-disable-next-line @next/next/no-img-element
       <img
@@ -110,13 +110,13 @@ const ChannelLine = ({ video }: { video: VideoResult }) => (
         className="size-4 shrink-0 rounded-full"
       />
     )}
-    <span className="truncate text-xs text-neutral-500">
+    <span className="max-w-full truncate text-xs text-neutral-500">
       {video.channel?.name}
     </span>
     {video.channel?.verified && (
       <BadgeCheck className="size-3.5 shrink-0 text-neutral-400" />
     )}
-    <span className="shrink-0 text-xs text-neutral-400">
+    <span className="text-xs text-neutral-400">
       {[
         video.views !== undefined ? `${formatCount(video.views)} views` : null,
         video.published_date,
